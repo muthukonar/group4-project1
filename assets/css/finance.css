@@ -1,10 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    margin: 0px;
     font-family: Roboto, "Open Sans", Lato;
 }
 
+main {
+    height: 700px;
+}
 
-#submitButton {
+footer {
+    background-color: #155a00;
+    height: 190px;
+    border-top: 5px solid #38e404;
+}
+
+#backToSignIn {
+    color: white;
+    display: inline;
+    float: right;
+    margin-right: 35px;
+    margin-top: 40px;
+}
+
+#backToSignIn:hover {
+    cursor: pointer;
+}
+
+
+#submitButton2 {
     position: relative;
     bottom: 380px;
     left: 520px;
@@ -17,12 +43,12 @@ body {
     box-shadow: 1px 1px black;
 }
 
-#submitButton:active {
-    box-shadow: 3px 3px black;
-    transform: translateY(4px);
+#submitButton2:active {
+    box-shadow: 4px 4px black;
+    transform: translateY(6px);
 }
 
-#Name {
+#monthly {
     position: relative;
     font-size: xx-large;
     bottom: 425px;
@@ -30,24 +56,25 @@ body {
     width: 220px;
 }
 
-#LastName {
+#budgetInput {
     position: relative;
-    bottom: 515px;
+    bottom: 505px;
     left: 900px;
     width: 300px;
     height: 50px;
-    font-size: 20px;
+    font-size: 24px;
 }
 
-#FirstName {
+#incomeInput {
     position: relative;
-    bottom: 500px;
+    bottom: 490px;
     left: 900px;
     width: 300px;
     height: 50px;
+    font-size: 24px;
 }
 
-h1 {
+#h1-2 {
     position: relative;
     top: 80px;
     left: 380px;
