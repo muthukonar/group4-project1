@@ -1,0 +1,27 @@
+
+
+#backToSignIn {
+    color: white;
+    display: inline;
+    float: right;
+    margin-right: 35px;
+    margin-top: 40px;
+}
+
+#backToSignIn:hover {
+    cursor: pointer;
+}
+
+.head {
+    background-color: #155a00;
+    box-shadow: 0px 5px #38e404;
+    margin: 0px;
+}
+
+#headerLogo {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 20px;
+    padding: 10px;
+}
