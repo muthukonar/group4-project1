@@ -1,12 +1,13 @@
-const submitButton2 = document.getElementById('submitButton2');
-const backToSignIn = document.getElementById('backToSignIn');
+document.getElementById("financeForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-submitButton2.addEventListener('click', redirectPage2)
-    function redirectPage2(url) {
-        location.href = '<!---FILL WITH RESULTS PAGE ./--->!'
-}
+    const monthlyIncome = document.getElementById("monthlyIncome").value;
+    const monthlyBudget = document.getElementById("monthlyBudget").value;
 
-backToSignIn.addEventListener('click', redirectPage3)
-    function redirectPage3(url) {
-        location.href = './index.html'
-}
+    if (monthlyIncome && monthlyBudget) {
+        localStorage.setItem("finance", JSON.stringify({ monthlyIncome, monthlyBudget }));
+        window.location.href = "expense.html";
+    } else {
+        alert("Please fill out all fields.");
+    }
+});
