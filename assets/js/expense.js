@@ -1,108 +1,68 @@
-
-function calculateTotalExpense(weeklyExpenses, monthlyExpenses) {
-    return (
-        weeklyExpenses.weeklyGroceries +
-        weeklyExpenses.weeklyFuel +
-        weeklyExpenses.weeklyEntertainment +
-        monthlyExpenses.monthlyRent +
-        monthlyExpenses.monthlyCellphone +
-        monthlyExpenses.monthlyUtilities
-    ).toFixed(2);
-}
-
-console.log(weeklyGroceries);
-
-function saveExpensesToLocalStorage(weeklyExpenses, monthlyExpenses, totalMonthlyExpense) {
-    const expenses = {
-        weekly: weeklyExpenses,
-        monthly: monthlyExpenses,
-        totalMonthlyExpense
-    };
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-}
-
-
-
-function handleFormSubmit(event) {
-    event.preventDefault();
-
-    // Weekly expenses
-    // const weeklyGroceries = getInputValue("weeklyGroceries");
-    const weeklyGroceries = parseFloat(document.getElementById("weeklyGroceries").value) || 0;
-    const weeklyFuel = parseFloat(document.getElementById("weeklyFuel").value) || 0;
-    const weeklyEntertainment = parseFloat(document.getElementById("weeklyEntertainment").value) || 0;
-
-
-    console.log(weeklyGroceries);
-
-   
-    const monthlyRent = parseFloat(document.getElementById("monthlyRent").value) || 0;
-    const monthlyCellphone = parseFloat(document.getElementById("monthlyCellphone").value) || 0;
-    const monthlyUtilities = parseFloat(document.getElementById("monthlyUtilities").value) || 0;
- 
-
- 
-    const weeklyExpenses = { weeklyGroceries, weeklyFuel, weeklyEntertainment };
-    const monthlyExpenses = { monthlyRent, monthlyCellphone, monthlyUtilities };
-  
-
-    
-
-
-    const totalMonthlyExpense = calculateTotalExpense(weeklyExpenses, monthlyExpenses);
-   
-    document.getElementById("totalMonthlyExpense").value = totalMonthlyExpense;
-    console.log(totalMonthlyExpense);
-
-
-    const financeData = JSON.parse(localStorage.getItem("finance"));
-    const monthlyIncome = parseFloat(financeData?.monthlyIncome) || 0;
-    const monthlyBudget = parseFloat(financeData?.monthlyBudget) || 0;
-
-    let savingsOrLoss = (monthlyIncome - totalMonthlyExpense).toFixed(2);
-    let statusMessage = "No Status";
-
-    if (savingsOrLoss > 0) {
-        statusMessage = `You have savings of $${savingsOrLoss}.`;
-        
-        
-        document.getElementById("firecrackerAnimation").style.display = "block"; 
-        document.getElementById("sadFaceAnimation").style.display = "none"; 
-    } else if (savingsOrLoss < 0) {
-        statusMessage = `You are in loss of $${Math.abs(savingsOrLoss)}.`;
-
-        
-        document.getElementById("sadFaceAnimation").style.display = "block"; 
-        document.getElementById("firecrackerAnimation").style.display = "none"; 
-    } else {
-        statusMessage = "Your expenses exactly match your income.";
-        document.getElementById("firecrackerAnimation").style.display = "none"; 
-        document.getElementById("sadFaceAnimation").style.display = "none"; 
+document.addEventListener('DOMContentLoaded', function() {
+    const financialForm = document.querySelector('form');
+    if (financialForm) {
+        financialForm.addEventListener('submit', function(e) {
+            const income = document.getElementById('monthlyIncome')?.value;
+            const budget = document.getElementById('monthlyBudget')?.value;
+            if (income && budget) {
+                sessionStorage.setItem('monthlyIncome', income);
+                sessionStorage.setItem('monthlyBudget', budget);
+            }
+        });
     }
 
-    
-    let budgetStatus = "No Budget Status";
-    if (totalMonthlyExpense <= monthlyBudget) {
-        budgetStatus = "You are within the budget.";
-    } else {
-        budgetStatus = `You exceeded the budget by $${(totalMonthlyExpense - monthlyBudget).toFixed(2)}.`;
+    const expensesPage = document.getElementById('total');
+    if (expensesPage) {
+        const allInputs = document.querySelectorAll('input[type="number"]');
+        
+        const savedIncome = sessionStorage.getItem('monthlyIncome') || 0;
+        const savedBudget = sessionStorage.getItem('monthlyBudget') || 0;
+        
+        document.getElementById('incomeDisplay').textContent = `Income: $${savedIncome}`;
+        document.getElementById('budgetDisplay').textContent = `Budget: $${savedBudget}`;
+
+        allInputs.forEach(input => {
+            input.addEventListener('input', calculateTotals);
+        });
+
+        function calculateTotals() {
+            const weeklyGroceries = Number(document.getElementById('groceries').value) || 0;
+            const weeklyFuel = Number(document.getElementById('fuel').value) || 0;
+            const weeklyEntertainment = Number(document.getElementById('entertainment').value) || 0;
+
+            const monthlyRent = Number(document.getElementById('rent').value) || 0;
+            const monthlyCellphone = Number(document.getElementById('cellphone').value) || 0;
+            const monthlyUtilities = Number(document.getElementById('utilities').value) || 0;
+
+            const totalMonthlyExpenses = 
+                (weeklyGroceries * 4) + 
+                (weeklyFuel * 4) + 
+                (weeklyEntertainment * 4) + 
+                monthlyRent + 
+                monthlyCellphone + 
+                monthlyUtilities;
+
+            document.getElementById('total').textContent = `$${totalMonthlyExpenses}`;
+            document.getElementById('totalExp').textContent = `Total Exp: $${totalMonthlyExpenses}`;
+
+            const alertElement = document.getElementById('alert');
+            if (totalMonthlyExpenses > Number(savedBudget)) {
+                alertElement.textContent = "You have exceeded budget!";
+                alertElement.classList.add('text-danger');
+                alertElement.classList.add('fw-bold');
+            } else {
+                alertElement.textContent = "You are within budget";
+                alertElement.classList.remove('text-danger');
+                alertElement.classList.remove('fw-bold');
+            }
+        }
     }
 
+    backToSignIn.addEventListener('click', redirectPage3)
+    function redirectPage3(url) {
+        location.href = './index.html'
+}
  
-    document.getElementById("savingsOrLoss").innerHTML = statusMessage;
-    document.getElementById("budgetStatus").innerHTML = budgetStatus;
-
     
-    saveExpensesToLocalStorage(weeklyExpenses, monthlyExpenses, totalMonthlyExpense);
-}
-
-
-function handleSignOut() {
-    localStorage.clear();
-    window.location.href = "login.html";
-}
-
-
-document.getElementById("expenseForm").addEventListener("submit", handleFormSubmit);
-document.getElementById("signOutBtn").addEventListener("click", handleSignOut);
+}); 
 
