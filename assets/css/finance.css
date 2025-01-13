@@ -17,7 +17,20 @@ footer {
     border-top: 5px solid #38e404;
 }
 
-#submitButton {
+#backToSignIn {
+    color: white;
+    display: inline;
+    float: right;
+    margin-right: 35px;
+    margin-top: 40px;
+}
+
+#backToSignIn:hover {
+    cursor: pointer;
+}
+
+
+#submitButton2 {
     position: relative;
     bottom: 380px;
     left: 520px;
@@ -30,12 +43,12 @@ footer {
     box-shadow: 1px 1px black;
 }
 
-#submitButton:active {
-    box-shadow: 3px 3px black;
-    transform: translateY(4px);
+#submitButton2:active {
+    box-shadow: 4px 4px black;
+    transform: translateY(6px);
 }
 
-#name {
+#monthly {
     position: relative;
     font-size: xx-large;
     bottom: 425px;
@@ -43,25 +56,26 @@ footer {
     width: 220px;
 }
 
-#lastName {
+#monthlyBudget {
+    position: relative;
+    bottom: 505px;
+    left: 900px;
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+}
+
+#monthlyIncome {
     position: relative;
     bottom: 490px;
     left: 900px;
     width: 300px;
     height: 50px;
-    font-size: 20px;
+    font-size: 24px;
+    text-decoration: none;
 }
 
-#firstName {
-    position: relative;
-    bottom: 470px;
-    left: 900px;
-    width: 300px;
-    height: 50px;
-    font-size: 20px;
-}
-
-h1 {
+#h1-2 {
     position: relative;
     top: 80px;
     left: 380px;
