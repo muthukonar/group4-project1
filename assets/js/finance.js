@@ -1,15 +1,24 @@
-document.getElementById("financeForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const monthlyIncome = document.getElementById("monthlyIncome").value;
-    const monthlyBudget = document.getElementById("monthlyBudget").value;
-
-    if (monthlyIncome && monthlyBudget) {
-        localStorage.setItem("finance", JSON.stringify({ monthlyIncome, monthlyBudget }));
-        window.location.href = "expenses.html";
-    } else {
-        alert("Please fill out all fields.");
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    const financeForm = document.getElementById('financeForm');
+    
+    financeForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const income = document.getElementById('monthlyIncome').value;
+        const budget = document.getElementById('monthlyBudget').value;
+        
+        console.log('Form submitted with values:', { income, budget });
+        
+        localStorage.setItem('income', income);
+        localStorage.setItem('budget', budget);
+        
+        console.log('Stored values:', {
+            savedIncome: localStorage.getItem('income'),
+            savedBudget: localStorage.getItem('budget')
+        });
+        
+        window.location.href = './expenses.html';
+    });
 });
 
 backToSignIn.addEventListener('click', redirectPage3)
