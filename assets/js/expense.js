@@ -1,86 +1,77 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initializeExpenseTracker();
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const financialForm = document.querySelector('form');
+    if (financialForm) {
+        financialForm.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-function initializeExpenseTracker() {
-    const elements = {
-        total: document.getElementById('total'),
-        backToSignIn: document.getElementById('backToSignIn'),
-        inputs: document.querySelectorAll('input[type="number"]'),
-        displays: {
-            income: document.getElementById('incomeDisplay'),
-            budget: document.getElementById('budgetDisplay'),
-            total: document.getElementById('totalExp'),
-            alert: document.getElementById('alert')
-        }
-    };
+            const income = document.getElementById('monthlyIncome').value;
+            const budget = document.getElementById('monthlyBudget').value;
 
-    const financialData = {
-        income: Number(localStorage.getItem('income')) || 0,
-        budget: Number(localStorage.getItem('budget')) || 0
-    };
+            console.log('Form submitted with values:', { income, budget });
 
-    if (elements.displays.income && elements.displays.budget) {
-        elements.displays.income.textContent = formatCurrency(financialData.income);
-        elements.displays.budget.textContent = formatCurrency(financialData.budget, 'Budget: ');
-    }
+            if (income && budget) {
+                localStorage.setItem('income', income);
+                localStorage.setItem('budget', budget);
 
-    elements.inputs.forEach(input => {
-        input.addEventListener('input', () => calculateTotals(elements, financialData.budget));
-    });
+                console.log('Stored values:', {
+                    savedIncome: localStorage.getItem('income'),
+                    savedBudget: localStorage.getItem('budget')
+                });
 
-    if (elements.backToSignIn) {
-        elements.backToSignIn.addEventListener('click', () => {
-            window.location.href = './index.html';
+                window.location.href = './expenses.html';
+            }
         });
     }
-}
+});
 
-function calculateTotals(elements, budget) {
-    const expenses = {
-        weekly: getExpenseValues(['groceries', 'fuel', 'entertainment']),
-        monthly: getExpenseValues(['rent', 'cellphone', 'utilities'])
-    };
+    const expensesPage = document.getElementById('total');
+    if (expensesPage) {
+        const allInputs = document.querySelectorAll('input[type="number"]');
 
-    const totalMonthlyExpenses = calculateMonthlyTotal(expenses);
-    updateDisplays(elements, totalMonthlyExpenses, budget);
-}
+        const savedIncome = localStorage.getItem('income') || 0;
+        const savedBudget = localStorage.getItem('budget') || 0;
 
-function getExpenseValues(ids) {
-    return ids.reduce((acc, id) => {
-        const element = document.getElementById(id);
-        acc[id] = element ? Number(element.value) || 0 : 0;
-        return acc;
-    }, {});
-}
+        document.getElementById('incomeDisplay').textContent = `Income: $${savedIncome}`;
+        document.getElementById('budgetDisplay').textContent = `Budget: $${savedBudget}`;
 
-function calculateMonthlyTotal(expenses) {
-    const weeklyTotal = Object.values(expenses.weekly).reduce((sum, val) => sum + val, 0) * 4;
-    const monthlyTotal = Object.values(expenses.monthly).reduce((sum, val) => sum + val, 0);
-    return weeklyTotal + monthlyTotal;
-}
+        allInputs.forEach(input => {
+            input.addEventListener('input', calculateTotals);
+        });
 
-function updateDisplays(elements, totalExpenses, budget) {
-    const { total, displays } = elements;
-    const formattedTotal = formatCurrency(totalExpenses);
+        function calculateTotals() {
+            const weeklyGroceries = Number(document.getElementById('groceries').value) || 0;
+            const weeklyFuel = Number(document.getElementById('fuel').value) || 0;
+            const weeklyEntertainment = Number(document.getElementById('entertainment').value) || 0;
 
-    if (total) total.textContent = formattedTotal;
-    if (displays.total) displays.total.textContent = formatCurrency(totalExpenses, 'Total Exp: ');
-    
-    updateBudgetAlert(displays.alert, totalExpenses, budget);
-}
+            const monthlyRent = Number(document.getElementById('rent').value) || 0;
+            const monthlyCellphone = Number(document.getElementById('cellphone').value) || 0;
+            const monthlyUtilities = Number(document.getElementById('utilities').value) || 0;
 
-function updateBudgetAlert(alertElement, totalExpenses, budget) {
-    if (!alertElement) return;
+            const totalMonthlyExpenses = 
+                (weeklyGroceries * 4) + 
+                (weeklyFuel * 4) + 
+                (weeklyEntertainment * 4) + 
+                monthlyRent + 
+                monthlyCellphone + 
+                monthlyUtilities;
 
-    const isOverBudget = totalExpenses > budget;
-    const message = isOverBudget ? "You have exceeded budget!" : "You are within budget.";
-    
-    alertElement.textContent = message;
-    alertElement.classList.toggle('text-danger', isOverBudget);
-    alertElement.classList.toggle('fw-bold', isOverBudget);
-}
+            document.getElementById('total').textContent = `$${totalMonthlyExpenses}`;
+            document.getElementById('totalExp').textContent = `Total Exp: $${totalMonthlyExpenses}`;
 
-function formatCurrency(amount, prefix = 'Income: ') {
-    return `${prefix}$${amount.toFixed(2)}`;
-}
+            const alertElement = document.getElementById('alert');
+            if (totalMonthlyExpenses > Number(savedBudget)) {
+                alertElement.textContent = "You have exceeded budget!";
+                alertElement.classList.add('text-danger');
+                alertElement.classList.add('fw-bold');
+            } else {
+                alertElement.textContent = "You are within budget.";
+                alertElement.classList.remove('text-danger');
+                alertElement.classList.remove('fw-bold');
+            }
+        }
+    }
+
+    backToSignIn.addEventListener('click', redirectPage3)
+    function redirectPage3(url) {
+        location.href = './index.html'
+};
