@@ -2,21 +2,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const financialForm = document.querySelector('form');
     if (financialForm) {
         financialForm.addEventListener('submit', function(e) {
-            const income = document.getElementById('monthlyIncome')?.value;
-            const budget = document.getElementById('monthlyBudget')?.value;
+            e.preventDefault(); // Prevent form from submitting normally
+            
+            const income = document.getElementById('monthlyIncome').value;
+            const budget = document.getElementById('monthlyBudget').value;
+            
+            console.log('Form submitted with values:', { income, budget }); // Debug log
+            
             if (income && budget) {
-                sessionStorage.setItem('monthlyIncome', income);
-                sessionStorage.setItem('monthlyBudget', budget);
+                localStorage.setItem('income', income);
+                localStorage.setItem('budget', budget);
+                
+                // Verify the values were saved
+                console.log('Stored values:', {
+                    savedIncome: localStorage.getItem('income'),
+                    savedBudget: localStorage.getItem('budget')
+                });
+                
+                // Redirect to expenses page
+                window.location.href = './expenses.html';
             }
         });
     }
+});
 
     const expensesPage = document.getElementById('total');
     if (expensesPage) {
         const allInputs = document.querySelectorAll('input[type="number"]');
         
-        const savedIncome = sessionStorage.getItem('monthlyIncome') || 0;
-        const savedBudget = sessionStorage.getItem('monthlyBudget') || 0;
+        const savedIncome = localStorage.getItem('income') || 0;
+        const savedBudget = localStorage.getItem('budget') || 0;
         
         document.getElementById('incomeDisplay').textContent = `Income: $${savedIncome}`;
         document.getElementById('budgetDisplay').textContent = `Budget: $${savedBudget}`;
@@ -51,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alertElement.classList.add('text-danger');
                 alertElement.classList.add('fw-bold');
             } else {
-                alertElement.textContent = "You are within budget";
+                alertElement.textContent = "You are within budget.";
                 alertElement.classList.remove('text-danger');
                 alertElement.classList.remove('fw-bold');
             }
@@ -61,8 +76,5 @@ document.addEventListener('DOMContentLoaded', function() {
     backToSignIn.addEventListener('click', redirectPage3)
     function redirectPage3(url) {
         location.href = './index.html'
-}
- 
-    
-}); 
+};
 
