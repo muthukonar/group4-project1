@@ -1,9 +1,34 @@
-body {
-    background-color: #f8f9fa;
+* {
+    margin: 0;
+    padding: 0;
 }
 
+body {
+    font-family: Roboto, "Open Sans", Lato;
+}
+
+main {
+    height: 700px;
+}
+
+footer {
+    background-color: #155a00;
+    height: 190px;
+    border-top: 5px solid #38e404;
+}
+
+#backToSignIn {
+    color: white;
+    display: inline;
+    float: right;
+    margin-right: 35px;
+    margin-top: 40px;
+}
+
+#backToSignIn:hover {
+    cursor: pointer;
+}
 .head {
-    display: flex;
     background-color: #155a00;
     box-shadow: 0px 5px #38e404;
     margin: 0px;
@@ -17,13 +42,12 @@ body {
     padding: 10px;
 }
 
-/* Navigation Styles */
+
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
 }
 
-/* Card Styles */
 .card {
     border: none;
     border-radius: 10px;
@@ -35,7 +59,6 @@ body {
     font-weight: 600;
 }
 
-/* Input Group Styles */
 .input-group-text {
     min-width: 120px;
     justify-content: end;
@@ -52,7 +75,6 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(29, 122, 0, 0.25);
 }
 
-/* Heading Styles */
 .expense-header {
     color: #1D7A00;
     font-weight: bold;
@@ -63,7 +85,6 @@ body {
     font-weight: bold;
 }
 
-/* Button Styles */
 .btn-success {
     background-color: #1D7A00;
     border-color: #1D7A00;
@@ -74,7 +95,6 @@ body {
     border-color: #165c00;
 }
 
-/* Alert Styles */
 .alert {
     border: 1px solid #dee2e6;
     background-color: #f8f9fa;
@@ -85,23 +105,19 @@ body {
     font-weight: bold;
 }
 
-/* Badge Styles */
 .badge.bg-success {
     background-color: #1D7A00 !important;
 }
 
-/* Form Label Styles */
 .form-label {
     font-weight: 500;
     color: #495057;
 }
 
-/* Shadow Effects */
 .shadow {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Responsive Padding */
 @media (max-width: 768px) {
     .container.py-5 {
         padding-top: 2rem !important;
