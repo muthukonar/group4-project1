@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Roboto, "Open Sans", Lato;
+}
+
+main {
+    height: 700px;
+}
+
+footer {
+    background-color: #155a00;
+    height: 190px;
+    border-top: 5px solid #38e404;
+}
+
+#backToSignIn {
+    color: white;
+    display: inline;
+    float: right;
+    margin-right: 35px;
+    margin-top: 40px;
+}
+
+#backToSignIn:hover {
+    cursor: pointer;
+}
+.head {
+    background-color: #155a00;
+    box-shadow: 0px 5px #38e404;
+    margin: 0px;
+}
+
+#headerLogo {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 20px;
+    padding: 10px;
+}
+
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
+}
+
+.input-group-text {
+    min-width: 120px;
+    justify-content: end;
+    background-color: #f8f9fa;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+}
+
+.form-control:focus {
+    border-color: #1D7A00;
+    box-shadow: 0 0 0 0.2rem rgba(29, 122, 0, 0.25);
+}
+
+.expense-header {
+    color: #1D7A00;
+    font-weight: bold;
+}
+
+.card-title {
+    color: #1D7A00;
+    font-weight: bold;
+}
+
+.btn-success {
+    background-color: #1D7A00;
+    border-color: #1D7A00;
+}
+
+.btn-success:hover {
+    background-color: #165c00;
+    border-color: #165c00;
+}
+
+.alert {
+    border: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+}
+
+#alert.text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.badge.bg-success {
+    background-color: #1D7A00 !important;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+@media (max-width: 768px) {
+    .container.py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+} 

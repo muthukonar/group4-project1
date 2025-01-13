@@ -6,7 +6,7 @@ document.getElementById("financeForm").addEventListener("submit", function(event
 
     if (monthlyIncome && monthlyBudget) {
         localStorage.setItem("finance", JSON.stringify({ monthlyIncome, monthlyBudget }));
-        window.location.href = "expense.html";
+        window.location.href = "expenses.html";
     } else {
         alert("Please fill out all fields.");
     }
