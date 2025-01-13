@@ -1,80 +1,86 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const financialForm = document.querySelector('form');
-    if (financialForm) {
-        financialForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent form from submitting normally
-            
-            const income = document.getElementById('monthlyIncome').value;
-            const budget = document.getElementById('monthlyBudget').value;
-            
-            console.log('Form submitted with values:', { income, budget }); // Debug log
-            
-            if (income && budget) {
-                localStorage.setItem('income', income);
-                localStorage.setItem('budget', budget);
-                
-                // Verify the values were saved
-                console.log('Stored values:', {
-                    savedIncome: localStorage.getItem('income'),
-                    savedBudget: localStorage.getItem('budget')
-                });
-                
-                // Redirect to expenses page
-                window.location.href = './expenses.html';
-            }
-        });
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    initializeExpenseTracker();
 });
 
-    const expensesPage = document.getElementById('total');
-    if (expensesPage) {
-        const allInputs = document.querySelectorAll('input[type="number"]');
-        
-        const savedIncome = localStorage.getItem('income') || 0;
-        const savedBudget = localStorage.getItem('budget') || 0;
-        
-        document.getElementById('incomeDisplay').textContent = `Income: $${savedIncome}`;
-        document.getElementById('budgetDisplay').textContent = `Budget: $${savedBudget}`;
-
-        allInputs.forEach(input => {
-            input.addEventListener('input', calculateTotals);
-        });
-
-        function calculateTotals() {
-            const weeklyGroceries = Number(document.getElementById('groceries').value) || 0;
-            const weeklyFuel = Number(document.getElementById('fuel').value) || 0;
-            const weeklyEntertainment = Number(document.getElementById('entertainment').value) || 0;
-
-            const monthlyRent = Number(document.getElementById('rent').value) || 0;
-            const monthlyCellphone = Number(document.getElementById('cellphone').value) || 0;
-            const monthlyUtilities = Number(document.getElementById('utilities').value) || 0;
-
-            const totalMonthlyExpenses = 
-                (weeklyGroceries * 4) + 
-                (weeklyFuel * 4) + 
-                (weeklyEntertainment * 4) + 
-                monthlyRent + 
-                monthlyCellphone + 
-                monthlyUtilities;
-
-            document.getElementById('total').textContent = `$${totalMonthlyExpenses}`;
-            document.getElementById('totalExp').textContent = `Total Exp: $${totalMonthlyExpenses}`;
-
-            const alertElement = document.getElementById('alert');
-            if (totalMonthlyExpenses > Number(savedBudget)) {
-                alertElement.textContent = "You have exceeded budget!";
-                alertElement.classList.add('text-danger');
-                alertElement.classList.add('fw-bold');
-            } else {
-                alertElement.textContent = "You are within budget.";
-                alertElement.classList.remove('text-danger');
-                alertElement.classList.remove('fw-bold');
-            }
+function initializeExpenseTracker() {
+    const elements = {
+        total: document.getElementById('total'),
+        backToSignIn: document.getElementById('backToSignIn'),
+        inputs: document.querySelectorAll('input[type="number"]'),
+        displays: {
+            income: document.getElementById('incomeDisplay'),
+            budget: document.getElementById('budgetDisplay'),
+            total: document.getElementById('totalExp'),
+            alert: document.getElementById('alert')
         }
+    };
+
+    const financialData = {
+        income: Number(localStorage.getItem('income')) || 0,
+        budget: Number(localStorage.getItem('budget')) || 0
+    };
+
+    if (elements.displays.income && elements.displays.budget) {
+        elements.displays.income.textContent = formatCurrency(financialData.income);
+        elements.displays.budget.textContent = formatCurrency(financialData.budget, 'Budget: ');
     }
 
-    backToSignIn.addEventListener('click', redirectPage3)
-    function redirectPage3(url) {
-        location.href = './index.html'
-};
+    elements.inputs.forEach(input => {
+        input.addEventListener('input', () => calculateTotals(elements, financialData.budget));
+    });
 
+    if (elements.backToSignIn) {
+        elements.backToSignIn.addEventListener('click', () => {
+            window.location.href = './index.html';
+        });
+    }
+}
+
+function calculateTotals(elements, budget) {
+    const expenses = {
+        weekly: getExpenseValues(['groceries', 'fuel', 'entertainment']),
+        monthly: getExpenseValues(['rent', 'cellphone', 'utilities'])
+    };
+
+    const totalMonthlyExpenses = calculateMonthlyTotal(expenses);
+    updateDisplays(elements, totalMonthlyExpenses, budget);
+}
+
+function getExpenseValues(ids) {
+    return ids.reduce((acc, id) => {
+        const element = document.getElementById(id);
+        acc[id] = element ? Number(element.value) || 0 : 0;
+        return acc;
+    }, {});
+}
+
+function calculateMonthlyTotal(expenses) {
+    const weeklyTotal = Object.values(expenses.weekly).reduce((sum, val) => sum + val, 0) * 4;
+    const monthlyTotal = Object.values(expenses.monthly).reduce((sum, val) => sum + val, 0);
+    return weeklyTotal + monthlyTotal;
+}
+
+function updateDisplays(elements, totalExpenses, budget) {
+    const { total, displays } = elements;
+    const formattedTotal = formatCurrency(totalExpenses);
+
+    if (total) total.textContent = formattedTotal;
+    if (displays.total) displays.total.textContent = formatCurrency(totalExpenses, 'Total Exp: ');
+    
+    updateBudgetAlert(displays.alert, totalExpenses, budget);
+}
+
+function updateBudgetAlert(alertElement, totalExpenses, budget) {
+    if (!alertElement) return;
+
+    const isOverBudget = totalExpenses > budget;
+    const message = isOverBudget ? "You have exceeded budget!" : "You are within budget.";
+    
+    alertElement.textContent = message;
+    alertElement.classList.toggle('text-danger', isOverBudget);
+    alertElement.classList.toggle('fw-bold', isOverBudget);
+}
+
+function formatCurrency(amount, prefix = 'Income: ') {
+    return `${prefix}$${amount.toFixed(2)}`;
+}
