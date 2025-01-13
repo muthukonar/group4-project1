@@ -1,84 +1,110 @@
-.expense-containers {
-    display: flex;           
-    justify-content: space-between; 
-    gap: 20px;                
-    background-color: rgba(193, 181, 141, 0.579);
-    height: 90%;
-    width: 100%;
+body {
+    background-color: #f8f9fa;
 }
 
-.weeklycontainer, .monthlycontainer {
-    width: 48%;              
-    padding: 20px;
-    background-color: rgba(193, 181, 141, 0.579);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.head {
+    display: flex;
+    background-color: #155a00;
+    box-shadow: 0px 5px #38e404;
+    margin: 0px;
 }
 
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0, 0, 0, 0.4); 
+#headerLogo {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 20px;
+    padding: 10px;
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; 
-    max-width: 400px;
+/* Navigation Styles */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
-
-h3 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+/* Card Styles */
+.card {
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
+    border-radius: 10px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
 }
 
-#signOutBtn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+/* Input Group Styles */
+.input-group-text {
+    min-width: 120px;
+    justify-content: end;
+    background-color: #f8f9fa;
+    border-right: none;
 }
 
-#signOutBtn:hover {
-    background-color: #c82333;
+.form-control {
+    border-left: none;
 }
+
+.form-control:focus {
+    border-color: #1D7A00;
+    box-shadow: 0 0 0 0.2rem rgba(29, 122, 0, 0.25);
+}
+
+/* Heading Styles */
+.expense-header {
+    color: #1D7A00;
+    font-weight: bold;
+}
+
+.card-title {
+    color: #1D7A00;
+    font-weight: bold;
+}
+
+/* Button Styles */
+.btn-success {
+    background-color: #1D7A00;
+    border-color: #1D7A00;
+}
+
+.btn-success:hover {
+    background-color: #165c00;
+    border-color: #165c00;
+}
+
+/* Alert Styles */
+.alert {
+    border: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+}
+
+#alert.text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Badge Styles */
+.badge.bg-success {
+    background-color: #1D7A00 !important;
+}
+
+/* Form Label Styles */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Shadow Effects */
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Responsive Padding */
+@media (max-width: 768px) {
+    .container.py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+} 
