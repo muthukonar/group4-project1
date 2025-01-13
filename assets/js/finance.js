@@ -11,3 +11,8 @@ document.getElementById("financeForm").addEventListener("submit", function(event
         alert("Please fill out all fields.");
     }
 });
+
+backToSignIn.addEventListener('click', redirectPage3)
+    function redirectPage3(url) {
+        location.href = './index.html'
+}
