@@ -13,23 +13,26 @@
 <body>
     <header class="head">
         <img src="./assets/images/BUMSYST LOGO - WHITE TEXT.png" alt="Budget Managment System Logo" id="headerLogo">
-        <h1 href="./index.html" id="backToSignIn">Back to Sign In</h1>
     </header>
     <main>
-        <form id="financeForm">
-            <h1 id="h1-2">Finance Information</h1>
-
-            <h2 id="monthly">Monthly Income:</h2>
-            <input type="number" id="monthlyIncome" required>
-
-            <h2 id="monthly">Monthly Budget:</h2>
-            <input type="number" id="monthlyBudget" required>
-
-            <button type="submit" id="submitButton2">Submit</button>
-        </form>
+        <div class="container">
+            <form id="financeForm">
+                <h1 id="h1-2">Finance Information</h1>
+    
+                <label id="monthly" for="monthlyIncome">Monthly Income:</label>
+                <input type="number" min="0" id="monthlyIncome">
+    
+                <label id="monthly" for="monthlyBudget">Monthly Budget:</label>
+                <input type="number" min="0" id="monthlyBudget">
+    
+                <button type="submit" id="submitButton2">Submit</button>
+            </form>
+        </div>
     </main>
     <footer>
-        <br>
+        <a href="./index.html">
+            <button id="backToSignIn" class="btn">Back to Sign In</button>
+        </a>
     </footer>
     <script src="./assets/js/finance.js"></script>
 </body>
