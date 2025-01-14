@@ -1,75 +1,30 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
 }
 
+/* General styling */
 body {
     font-family: Roboto, "Open Sans", Lato;
 }
 
 main {
     height: 700px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa; 
 }
 
+/* Footer styling */
 footer {
     background-color: #155a00;
-    height: 190px;
+    height: 110px;
     border-top: 5px solid #38e404;
 }
 
-#submitButton {
-    position: relative;
-    bottom: 380px;
-    left: 520px;
-    height: 80px;
-    width: 200px;
-    font-size: 32px;
-    background-color: #1d7a00;
-    border-radius: 50px;
-    color: white;
-    box-shadow: 1px 1px black;
-}
-
-#submitButton:active {
-    box-shadow: 3px 3px black;
-    transform: translateY(4px);
-}
-
-#name {
-    position: relative;
-    font-size: xx-large;
-    bottom: 425px;
-    left: 700px;
-    width: 220px;
-}
-
-#lastName {
-    position: relative;
-    bottom: 490px;
-    left: 900px;
-    width: 300px;
-    height: 50px;
-    font-size: 20px;
-}
-
-#firstName {
-    position: relative;
-    bottom: 470px;
-    left: 900px;
-    width: 300px;
-    height: 50px;
-    font-size: 20px;
-}
-
-h1 {
-    position: relative;
-    top: 80px;
-    left: 380px;
-    width: 1100px;
-    height: 600px;
-    text-align: center;
-}
-
+/* Header styling */
 .head {
     background-color: #155a00;
     box-shadow: 0px 5px #38e404;
@@ -82,4 +37,72 @@ h1 {
     position: relative;
     left: 20px;
     padding: 10px;
+}
+
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    width: 400px; 
+    text-align: center;
+}
+
+/* Form heading styling */
+#h1-2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Input labels */
+#monthly {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #155a00;
+    display: block;
+}
+
+/* Input fields */
+input[type="text"] {
+    width: 100%; 
+    height: 40px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Submit button */
+#submitButton2 {
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    background-color: #1d7a00;
+    border-radius: 25px;
+    color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Shadow for button */
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Button hover and active effects */
+#submitButton2:hover {
+    background-color: #333;
+}
+
+#submitButton2:active {
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(3px);
+}
+
+/* Remove conflicting styles */
+#firstName,
+#lastName {
+    position: static; 
 }

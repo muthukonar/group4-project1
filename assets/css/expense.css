@@ -13,21 +13,38 @@ main {
 
 footer {
     background-color: #155a00;
-    height: 190px;
+    height: 180px;
     border-top: 5px solid #38e404;
 }
 
+/* Button styling */
 #backToSignIn {
-    color: white;
-    display: inline;
-    float: right;
-    margin-right: 35px;
-    margin-top: 40px;
+    width: auto;  
+    min-width: 150px;  
+    height: 50px;
+    font-size: 18px;
+    font-weight: 100px;
+    background-color: #ffffff;
+    border-radius: 25px; 
+    color: #1d7a00;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    text-align: center;  
+    padding: 0 20px;  
+    white-space: nowrap; 
+    margin-top: 20px;
 }
 
+/* Hover effect */
 #backToSignIn:hover {
     cursor: pointer;
 }
+
 .head {
     background-color: #155a00;
     box-shadow: 0px 5px #38e404;
@@ -124,3 +141,14 @@ footer {
         padding-bottom: 2rem !important;
     }
 } 
+@media (max-width: 768px) {
+    #backToSignIn {
+        width: 20%;  
+        height: 45px;  
+        font-size: 18px;  
+        border-radius: 25px;  
+        padding: 0 15px;  
+        align-items: center;
+        position: absolute;
+    }
+}
