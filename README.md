@@ -33,7 +33,7 @@ CREATORS AND LINKS TO GITHUBS:
 Pechimuthu Konar: https://github.com/muthukonar
 Hugh Moore: https://github.com/hughbenmoore
 Caleb Colangelo: https://github.com/CalebColangelo
-Stanley Bertrand: https://github.com/djsteezybaby
+Stanley Bertrand: https://github.com/bertrandstanley
 
 We used Bootstrap CSS, here is their link to an amazing framework: https://getbootstrap.com
 
